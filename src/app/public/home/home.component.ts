@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../http.service';
+import {User} from '../../UserInterface';
 
 @Component({
   selector: 'app-home',
@@ -27,16 +28,16 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  todos = [];
+  todos: User[] = [];
 
   constructor(private httpService: HttpService) {
   }
 
   ngOnInit(): void {
-    this.httpService.getAxios().get('https://jsonplaceholder.typicode.com/users')
+    this.httpService.getAxios().get('https://localhost:3000/users')
       .then(res => {
         console.log(res.data)
-        this.todos = res.data
+        this.todos = res.data;
       });
   }
 
