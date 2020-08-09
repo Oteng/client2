@@ -34,10 +34,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpService.getAxios().get('https://localhost:3000/users')
+    this.httpService.get('http://localhost:3000/users')
       .then(res => {
-        console.log(res.data)
-        this.todos = res.data;
+        if (!res.isFailed()) {
+          this.todos = res.getData();
+        } else {
+          console.log(res.getErrMsg());
+        }
       });
   }
 
